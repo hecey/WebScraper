@@ -7,6 +7,7 @@ package webscraper;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.function.ToIntFunction;
 
 /**
  *
@@ -70,7 +71,14 @@ public class EntriesCollection {
 
         System.out.println(newline + size + " records presented..." + newline + newline);
     }
+    
+    public <T> EntriesCollection ordeyByNumberOf(ToIntFunction<? extends Entry> keyExtractor) {
 
+        entriesCollection.sort((Comparator<? super Entry>) Comparator.comparingInt(keyExtractor));
+
+        return this;
+    }
+    
     public EntriesCollection ordeyByComments() {
 
         entriesCollection.sort(Comparator.comparingInt(Entry::getCommentsNumber));

@@ -17,13 +17,29 @@ public class WebScraper {
     private static int numberOfEntries = Configuration.numberOfEntries;
     private static int filterTitleParameter = Configuration.filterTitleParameter;
     private static String url = Configuration.url;
+    private static int choice = 0;
 
     public static void main(String[] args) {
         EntriesCollection entriesCollection = EntriesCollection.getInstance();
-        int choice = 0;
+        showAndValidateMenu(entriesCollection);
+
+    }
+
+    public static EntriesCollection scrapeURL(String url) {
+
+        String html = DataExtractor.getUrlCodeAsString("https://" + url);
+        if (DataExtractor.hasExtradtedCode(html)) {
+
+            EntriesCollection entriesCollection = DataExtractor.extractData(html, numberOfEntries);
+            return entriesCollection;
+        }
+        return null;
+    }
+
+    private static void showAndValidateMenu(EntriesCollection entriesCollection) {
         do {
             choice = Menu.getOption();
-
+            
             switch (choice) {
                 case 1:
                     System.out.println("Wait please.... obtaining data...");
@@ -45,7 +61,7 @@ public class WebScraper {
                 case 3:
                     if (entriesCollection != null) {
                         entriesCollection
-                                .ordeyByPoints()
+                                .ordeyByNumberOf(Configuration.comparatorKeyPoints)
                                 .displayEntries();
                     }
                     break;
@@ -70,18 +86,6 @@ public class WebScraper {
                 // The user input an unexpected choice.
             }
         } while (choice != 6);
-
-    }
-
-    public static EntriesCollection scrapeURL(String url) {
-
-        String html = DataExtractor.getUrlCodeAsString("https://" + url);
-        if (DataExtractor.hasExtradtedCode(html)) {
-
-            EntriesCollection entriesCollection = DataExtractor.extractData(html, numberOfEntries);
-            return entriesCollection;
-        }
-        return null;
     }
 
 }
