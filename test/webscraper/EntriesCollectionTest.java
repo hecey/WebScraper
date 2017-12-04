@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class EntriesCollectionTest {
 
-    private EntriesCollection instance;
+    private ArrayArticles instance;
     private final int number = 5;
 
     private String title;
@@ -23,7 +23,7 @@ public class EntriesCollectionTest {
     private int commentsNumber;
 
     public EntriesCollectionTest() {
-        this.instance = EntriesCollection.getInstance();
+        this.instance = ArrayArticles.getInstance();
 
     }
 
@@ -33,7 +33,7 @@ public class EntriesCollectionTest {
     @Test
     public void testGetInstanceIsCreated() {
         System.out.println("getInstance");
-        EntriesCollection expResult = null;
+        ArrayArticles expResult = null;
         assertNotEquals(expResult, instance);
 
     }
@@ -133,7 +133,7 @@ public class EntriesCollectionTest {
             orderNumber = i;
             commentsNumber = 100 - i;
 
-            instance.addEntry(new Entry.Builder()
+            instance.addEntry(new Article.Builder()
                     .orderNumber(orderNumber)
                     .title(title)
                     .points(points)

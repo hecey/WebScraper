@@ -82,7 +82,7 @@ public class DataExtractorTest {
 
         boolean expResult = true;
 
-        EntriesCollection result = DataExtractor.extractData(html, numberOfEntries);
+        ArrayArticles result = DataExtractor.extractData(html, numberOfEntries);
         assertEquals(expResult, result.hasEntries());
 
     }
@@ -94,7 +94,7 @@ public class DataExtractorTest {
 
         boolean expResult = true;
 
-        EntriesCollection result = DataExtractor.extractData("", numberOfEntries);
+        ArrayArticles result = DataExtractor.extractData("", numberOfEntries);
         assertEquals(expResult, result.hasEntries());
 
     }

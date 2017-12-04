@@ -9,7 +9,7 @@ package webscraper;
  *
  * @author kat
  */
-interface EntryInterface {
+interface Item {
 
     public int getOrderNumber();
 
@@ -18,6 +18,12 @@ interface EntryInterface {
     public int getPoints();
 
     public int getCommentsNumber();
-    
-    
+
+    public void setTitle(String title);
+
+    public void setOrderNumber(int orderNumber);
+
+    public void setPoints(int points);
+
+    public void setCommentsNumber(int commentsNumber);
 }

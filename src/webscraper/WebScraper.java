@@ -20,23 +20,23 @@ public class WebScraper {
     private static int choice = 0;
 
     public static void main(String[] args) {
-        EntriesCollection entriesCollection = EntriesCollection.getInstance();
+        Collection entriesCollection = ArrayArticles.getInstance();
         showAndValidateMenu(entriesCollection);
 
     }
 
-    public static EntriesCollection scrapeURL(String url) {
+    public static Collection scrapeURL(String url, Collection collection) {
 
         String html = DataExtractor.getUrlCodeAsString("https://" + url);
         if (DataExtractor.hasExtradtedCode(html)) {
 
-            EntriesCollection entriesCollection = DataExtractor.extractData(html, numberOfEntries);
+            Collection entriesCollection = DataExtractor.extractData(html, numberOfEntries, Article.class, collection);
             return entriesCollection;
         }
         return null;
     }
 
-    private static void showAndValidateMenu(EntriesCollection entriesCollection) {
+    private static void showAndValidateMenu(Collection collection) {
         do {
             choice = Menu.getOption();
             
@@ -44,37 +44,37 @@ public class WebScraper {
                 case 1:
                     System.out.println("Wait please.... obtaining data...");
 
-                    entriesCollection.removeAllEntries();
-                    entriesCollection = scrapeURL(url);
+                    collection.removeAllEntries();
+                    collection = scrapeURL(url,collection);
 
                     System.out.println("Data Extracted" + Configuration.newline);
 
-                    entriesCollection.displayEntries();
+                    collection.displayEntries();
                     break;
                 case 2:
-                    if (entriesCollection != null) {
-                        entriesCollection
+                    if (collection != null) {
+                        collection
                                 .ordeyByComments()
                                 .displayEntries();
                     }
                     break;
                 case 3:
-                    if (entriesCollection != null) {
-                        entriesCollection
+                    if (collection != null) {
+                        collection
                                 .ordeyByNumberOf(Configuration.comparatorKeyPoints)
                                 .displayEntries();
                     }
                     break;
                 case 4:
-                    if (entriesCollection != null) {
-                        entriesCollection
+                    if (collection != null) {
+                        collection
                                 .FilterByTitleMoreThan(filterTitleParameter)
                                 .displayEntries();
                     }
                     break;
                 case 5:
-                    if (entriesCollection != null) {
-                        entriesCollection
+                    if (collection != null) {
+                        collection
                                 .FilterByTitleLessThanOrEqual(filterTitleParameter)
                                 .displayEntries();
                         break;

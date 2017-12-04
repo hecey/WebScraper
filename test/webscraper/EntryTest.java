@@ -21,7 +21,7 @@ public class EntryTest {
     int points;
     int commentsNumber;
 
-    Entry instance;
+    Article instance;
 
     public EntryTest() {
         title = "title2";
@@ -29,7 +29,7 @@ public class EntryTest {
         orderNumber = 2;
         commentsNumber = 9;
 
-        instance = new Entry.Builder()
+        instance = new Article.Builder()
                 .orderNumber(orderNumber)
                 .title(title)
                 .points(points)

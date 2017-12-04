@@ -13,26 +13,26 @@ import java.util.function.ToIntFunction;
  *
  * @author kat
  */
-public class EntriesCollection {
+public class ArrayArticles implements Collection{
 
-    private static EntriesCollection instance = null;
-    ArrayList<Entry> entriesCollection;
+    private static ArrayArticles instance = null;
+    ArrayList<Item> entriesCollection;
     private static String newline = Configuration.newline;
     public static int MAX_NUMBER_OF_ENTRIES = Configuration.MAX_NUMBER_OF_ENTRIES;
     private int i;
 
-    protected EntriesCollection() {
-        entriesCollection = new ArrayList<Entry>();
+    protected ArrayArticles() {
+        entriesCollection = new ArrayList<Item>();
     }
 
-    public static EntriesCollection getInstance() {
+    public static ArrayArticles getInstance() {
         if (instance == null) {
-            instance = new EntriesCollection();
+            instance = new ArrayArticles();
         }
         return instance;
     }
 
-    public void addEntry(Entry entry) {
+    public void addEntry(Item entry) {
 
         if (entriesCollection.size() < MAX_NUMBER_OF_ENTRIES) {
             entriesCollection.add(entry);
@@ -72,31 +72,31 @@ public class EntriesCollection {
         System.out.println(newline + size + " records presented..." + newline + newline);
     }
 
-    public <T> EntriesCollection ordeyByNumberOf(ToIntFunction <? super Entry> keyExtractor) {
+    public <T> ArrayArticles ordeyByNumberOf(ToIntFunction <? super Item> keyExtractor) {
 
-        entriesCollection.sort((Comparator<? super Entry>) 
+        entriesCollection.sort((Comparator<? super Item>) 
                 Comparator.comparingInt(keyExtractor));
 
         return this;
     }
 
-    public EntriesCollection ordeyByComments() {
+    public ArrayArticles ordeyByComments() {
 
-        entriesCollection.sort(Comparator.comparingInt(Entry::getCommentsNumber));
-
-        return this;
-    }
-
-    public EntriesCollection ordeyByPoints() {
-
-        entriesCollection.sort(Comparator.comparingInt(Entry::getPoints));
+        entriesCollection.sort(Comparator.comparingInt(Item::getCommentsNumber));
 
         return this;
     }
 
-    public EntriesCollection FilterByTitleMoreThan(int number) {
+    public ArrayArticles ordeyByPoints() {
 
-        ArrayList<Entry> secondList = new ArrayList<>();
+        entriesCollection.sort(Comparator.comparingInt(Item::getPoints));
+
+        return this;
+    }
+
+    public ArrayArticles FilterByTitleMoreThan(int number) {
+
+        ArrayList<Item> secondList = new ArrayList<>();
 
         entriesCollection.forEach((a) -> {
             String trimmed = a.getTitle().trim();
@@ -111,8 +111,8 @@ public class EntriesCollection {
         return this;
     }
 
-    public EntriesCollection FilterByTitleLessThanOrEqual(int number) {
-        ArrayList<Entry> secondList = new ArrayList<>();
+    public ArrayArticles FilterByTitleLessThanOrEqual(int number) {
+        ArrayList<Item> secondList = new ArrayList<>();
 
         entriesCollection.forEach((a) -> {
             String trimmed = a.getTitle().trim();
@@ -138,7 +138,7 @@ public class EntriesCollection {
         }
     }
 
-    public EntriesCollection removeAllEntries() {
+    public ArrayArticles removeAllEntries() {
         if (entriesCollection != null) {
             entriesCollection.clear();
         }

@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -81,12 +83,13 @@ public class DataExtractor {
         return Integer.valueOf(text);
     }
 
-    public static EntriesCollection extractData(String html, int numberOfEntriesToObtain) {
+    public static Collection extractData(String html, int numberOfEntriesToObtain, 
+            Class<? extends Item> item, Collection collection) {
         Document doc = Jsoup.parse(html);
         Elements entriesExtracted = doc.select("table.itemlist tr");
         numberOfEntriesObtained = 0;
-
-        EntriesCollection entriesCollection = EntriesCollection.getInstance();
+        
+        
         int tdCount = 0;
         for (Element element : entriesExtracted) {
             tdCount++;
@@ -113,12 +116,13 @@ public class DataExtractor {
 
             if (element.text().equals("")) {
 
-                entriesCollection.addEntry(new Entry.Builder()
-                        .orderNumber(orderNumber)
-                        .title(title)
-                        .points(points)
-                        .commentsNumber(commentsNumber)
-                        .build());
+                collection.addEntry(
+                        Builder.build(item)
+                                .set(a -> a.setTitle(title))
+                                .set(a -> a.setOrderNumber(orderNumber))
+                                .set(a -> a.setPoints(points))
+                                .set(a -> a.setCommentsNumber(commentsNumber))
+                                .get());
 
                 clearPropertiesForNewEntry();
                 numberOfEntriesObtained++;
@@ -130,7 +134,7 @@ public class DataExtractor {
             }
         }
 
-        return entriesCollection;
+        return collection;
     }
 
     private static void clearPropertiesForNewEntry() {
