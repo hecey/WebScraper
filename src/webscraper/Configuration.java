@@ -36,5 +36,9 @@ public class Configuration {
 
     public static ToIntFunction<? super Item> comparatorKeyComments = Item::getCommentsNumber;
     public static ToIntFunction<? super Item> comparatorKeyPoints = Item::getPoints;
+    
+    public static Class<? extends Item> item= Article.class;
+    public static Collection entriesCollection = ArrayArticles.getInstance();
+    
 
 }

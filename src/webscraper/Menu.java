@@ -13,6 +13,11 @@ import java.util.Scanner;
  */
 public class Menu {
 
+    private static int choice = 0;
+    
+    private static int filterTitleParameter = Configuration.filterTitleParameter;
+    private static String url = Configuration.url;
+
     public static int getOption() {
 
         int selection;
@@ -37,6 +42,58 @@ public class Menu {
         } while (selection <= 0);
         return selection;
 
+    }
+
+    public static void showAndValidateMenu(Collection collection) {
+        do {
+            choice = Menu.getOption();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Wait please.... obtaining data...");
+
+                    collection.removeAllEntries();
+                    collection = DataExtractor.scrapeURL(url, collection);
+
+                    System.out.println("Data Extracted" + Configuration.newline);
+
+                    collection.displayEntries();
+                    break;
+                case 2:
+                    if (collection != null) {
+                        collection
+                                .ordeyByComments()
+                                .displayEntries();
+                    }
+                    break;
+                case 3:
+                    if (collection != null) {
+                        collection
+                                .ordeyByNumberOf(Configuration.comparatorKeyPoints)
+                                .displayEntries();
+                    }
+                    break;
+                case 4:
+                    if (collection != null) {
+                        collection
+                                .FilterByTitleMoreThan(filterTitleParameter)
+                                .displayEntries();
+                    }
+                    break;
+                case 5:
+                    if (collection != null) {
+                        collection
+                                .FilterByTitleLessThanOrEqual(filterTitleParameter)
+                                .displayEntries();
+                        break;
+                    }
+                case 6:
+                    System.out.println("End");
+                    break;
+                default:
+                // The user input an unexpected choice.
+            }
+        } while (choice != 6);
     }
 
 }

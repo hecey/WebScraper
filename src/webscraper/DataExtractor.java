@@ -83,13 +83,12 @@ public class DataExtractor {
         return Integer.valueOf(text);
     }
 
-    public static Collection extractData(String html, int numberOfEntriesToObtain, 
+    public static Collection extractData(String html, int numberOfEntriesToObtain,
             Class<? extends Item> item, Collection collection) {
         Document doc = Jsoup.parse(html);
         Elements entriesExtracted = doc.select("table.itemlist tr");
         numberOfEntriesObtained = 0;
-        
-        
+
         int tdCount = 0;
         for (Element element : entriesExtracted) {
             tdCount++;
@@ -142,5 +141,16 @@ public class DataExtractor {
         points = 0;
         orderNumber = 0;
         commentsNumber = 0;
+    }
+
+    public static Collection scrapeURL(String url, Collection collection) {
+
+        String html = DataExtractor.getUrlCodeAsString("https://" + url);
+        if (DataExtractor.hasExtradtedCode(html)) {
+
+            return DataExtractor
+                    .extractData(html, Configuration.numberOfEntries, Configuration.item, collection);
+        }
+        return null;
     }
 }
