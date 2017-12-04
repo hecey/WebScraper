@@ -5,6 +5,10 @@
  */
 package webscraper;
 
+import controller.Configuration;
+import controller.DataExtractor;
+import model.Collection;
+import model.ArrayArticles;
 import java.util.ArrayList;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webscraper;
+package controller;
 
+import model.Collection;
+import model.Article;
+import model.Item;
+import model.ArrayArticles;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
 
@@ -15,10 +19,10 @@ import java.util.function.ToIntFunction;
 public class Configuration {
 
     public static final int numberOfEntries = 30;
-    public static int filterTitleParameter = 6;
+    public static int filterTitleParameter = 5;
     public static String url = "news.ycombinator.com/";
 
-    public static int MAX_NUMBER_OF_ENTRIES = 40;
+    public static int MAX_NUMBER_OF_ENTRIES = 30;
 
     public static String numberHeaderText = "N#";
     public static String titleHeaderText = "Title";
@@ -32,7 +36,7 @@ public class Configuration {
     public static int pointsHeaderLenght = 6;
     public static int commentsHeaderLenght = 8;
 
-    public static String newline = System.getProperty("line.separator");
+    public static final String NEW_LINE = System.getProperty("line.separator");
 
     public static ToIntFunction<? super Item> comparatorKeyComments = Item::getCommentsNumber;
     public static ToIntFunction<? super Item> comparatorKeyPoints = Item::getPoints;

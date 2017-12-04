@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webscraper;
+package model;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.ToIntFunction;
+import controller.Configuration;
+
 
 /**
  *
@@ -17,7 +19,7 @@ public class ArrayArticles implements Collection {
 
     private static ArrayArticles instance = null;
     ArrayList<Item> entriesCollection;
-    private static String newline = Configuration.newline;
+    private static final String NEW_LINE = Configuration.NEW_LINE;
     public static int MAX_NUMBER_OF_ENTRIES = Configuration.MAX_NUMBER_OF_ENTRIES;
     private int i;
 
@@ -47,7 +49,7 @@ public class ArrayArticles implements Collection {
                 + "%-" + Configuration.titleHeaderLenght + "s | "
                 + "%" + Configuration.pointsHeaderLenght + "s | "
                 + "%" + Configuration.commentsHeaderLenght + "s | "
-                + newline,
+                + NEW_LINE,
                 Configuration.numberHeaderText,
                 Configuration.orderHeaderText,
                 Configuration.titleHeaderText,
@@ -62,14 +64,14 @@ public class ArrayArticles implements Collection {
                     + "%-" + Configuration.titleHeaderLenght + "s | "
                     + "%" + Configuration.pointsHeaderLenght + "d | "
                     + "%" + Configuration.commentsHeaderLenght + "d | "
-                    + newline,
+                    + NEW_LINE,
                     i,
                     entry.getOrderNumber(),
                     entry.getTitle(),
                     entry.getPoints(), entry.getCommentsNumber());
         });
 
-        System.out.println(newline + size + " records presented..." + newline + newline);
+        System.out.println(NEW_LINE + size + " records presented..." + NEW_LINE + NEW_LINE);
     }
 
     public <T> ArrayArticles ordeyByNumberOf(ToIntFunction<? super Item> keyExtractor) {
@@ -129,7 +131,7 @@ public class ArrayArticles implements Collection {
 
     private int countWords(String string) {
         String trimmed = string.trim();
-        int words = trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
-        return words;
+
+        return trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
     }
 }

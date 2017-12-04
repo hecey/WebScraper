@@ -5,6 +5,8 @@
  */
 package webscraper;
 
+import model.Builder;
+import model.Article;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,10 +32,10 @@ public class EntryTest {
         commentsNumber = 9;
 
         instance = Builder.build(Article.class)
-                .set(p -> p.setTitle(title))
-                .set(p -> p.setOrderNumber(orderNumber))
-                .set(p -> p.setPoints(points))
-                .set(p -> p.setCommentsNumber(commentsNumber))
+                .setter(p -> p.setTitle(title))
+                .setter(p -> p.setOrderNumber(orderNumber))
+                .setter(p -> p.setPoints(points))
+                .setter(p -> p.setCommentsNumber(commentsNumber))
                 .get();
         
     }

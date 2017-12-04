@@ -5,6 +5,8 @@
  */
 package webscraper;
 
+import controller.Configuration;
+
 /**
  *
  * @author katrina

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webscraper;
+package model;
 
 /**
  *
  * @author kat
  */
-interface Item {
+public interface Item {
 
     public int getOrderNumber();
 

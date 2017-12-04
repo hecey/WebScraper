@@ -5,6 +5,9 @@
  */
 package webscraper;
 
+import model.Builder;
+import model.Article;
+import model.ArrayArticles;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -135,10 +138,10 @@ public class EntriesCollectionTest {
 
             instance.addEntry(
                     Builder.build(Article.class)
-                            .set(p -> p.setTitle(title))
-                            .set(p -> p.setOrderNumber(orderNumber))
-                            .set(p -> p.setPoints(points))
-                            .set(p -> p.setCommentsNumber(commentsNumber))
+                            .setter(p -> p.setTitle(title))
+                            .setter(p -> p.setOrderNumber(orderNumber))
+                            .setter(p -> p.setPoints(points))
+                            .setter(p -> p.setCommentsNumber(commentsNumber))
                             .get());
             
             if (i == 10) {

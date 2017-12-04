@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webscraper;
+package model;
 
 import java.util.function.Consumer;
 
@@ -22,7 +22,7 @@ public class Builder<T> {
        } 
     }
     
-    public Builder<T> set(Consumer<T> setter){
+    public Builder<T> setter(Consumer<T> setter){
        if(ifCond)
            setter.accept(instance);
        return this;

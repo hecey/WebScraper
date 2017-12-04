@@ -5,6 +5,9 @@
  */
 package webscraper;
 
+import controller.Configuration;
+import controller.DataExtractor;
+import model.Collection;
 import java.util.Scanner;
 
 /**
@@ -29,9 +32,9 @@ public class Menu {
         System.out.println("2 - Ordered by amount of comments");
         System.out.println("3 - Ordered by points");
         System.out.format("4 - Filter all previous entries with More Than %s Words in the title"
-                + Configuration.newline, Configuration.filterTitleParameter);
+                + Configuration.NEW_LINE, Configuration.filterTitleParameter);
         System.out.format("5 - Filter all previous entries with less than or equal to %s words"
-                + Configuration.newline, Configuration.filterTitleParameter);
+                + Configuration.NEW_LINE, Configuration.filterTitleParameter);
         System.out.println("6 - Quit");
         do {
             while (!input.hasNextInt()) {
@@ -55,7 +58,7 @@ public class Menu {
                     collection.removeAllEntries();
                     collection = DataExtractor.scrapeURL(url, collection);
 
-                    System.out.println("Data Extracted" + Configuration.newline);
+                    System.out.println("Data Extracted" + Configuration.NEW_LINE);
 
                     collection.displayEntries();
                     break;
