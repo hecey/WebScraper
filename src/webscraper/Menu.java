@@ -23,8 +23,10 @@ public class Menu {
         System.out.println("1 - Extract Data from URL again");
         System.out.println("2 - Ordered by amount of comments");
         System.out.println("3 - Ordered by points");
-        System.out.println("4 - Filter all previous entries with More Than five Words in the title");
-        System.out.println("5 - Filter all previous entries with less than or equal to five words");
+        System.out.format("4 - Filter all previous entries with More Than %s Words in the title"
+                + Configuration.newline, Configuration.filterTitleParameter);
+        System.out.format("5 - Filter all previous entries with less than or equal to %s words"
+                + Configuration.newline, Configuration.filterTitleParameter);
         System.out.println("6 - Quit");
         do {
             while (!input.hasNextInt()) {

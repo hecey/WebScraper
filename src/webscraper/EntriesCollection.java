@@ -32,8 +32,8 @@ public class EntriesCollection {
         return instance;
     }
 
-    public void addEntry(String title, int points, int orderNumber, int commentsNumber) {
-        Entry entry = new Entry(title, points, orderNumber, commentsNumber);
+    public void addEntry(Entry entry) {
+
         if (entriesCollection.size() < MAX_NUMBER_OF_ENTRIES) {
             entriesCollection.add(entry);
         }
@@ -71,14 +71,15 @@ public class EntriesCollection {
 
         System.out.println(newline + size + " records presented..." + newline + newline);
     }
-    
-    public <T> EntriesCollection ordeyByNumberOf(ToIntFunction<? extends Entry> keyExtractor) {
 
-        entriesCollection.sort((Comparator<? super Entry>) Comparator.comparingInt(keyExtractor));
+    public <T> EntriesCollection ordeyByNumberOf(ToIntFunction <? super Entry> keyExtractor) {
+
+        entriesCollection.sort((Comparator<? super Entry>) 
+                Comparator.comparingInt(keyExtractor));
 
         return this;
     }
-    
+
     public EntriesCollection ordeyByComments() {
 
         entriesCollection.sort(Comparator.comparingInt(Entry::getCommentsNumber));

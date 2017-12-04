@@ -34,7 +34,7 @@ public class Configuration {
 
     public static String newline = System.getProperty("line.separator");
 
-    public static ToIntFunction<? extends Entry> comparatorKeyComments = Entry::getCommentsNumber;
-    public static ToIntFunction<? extends Entry> comparatorKeyPoints = Entry::getPoints;
+    public static ToIntFunction<? super Entry> comparatorKeyComments = Entry::getCommentsNumber;
+    public static ToIntFunction<? super Entry> comparatorKeyPoints = Entry::getPoints;
 
 }

@@ -23,6 +23,13 @@ import org.jsoup.select.Elements;
  */
 public class DataExtractor {
 
+    private static String title = "";
+    private static int points = 0;
+    private static int orderNumber = 0;
+    private static int commentsNumber = 0;
+
+    private static int numberOfEntriesObtained;
+
     public static String getUrlCodeAsString(String url) {
         URL urlObj = null;
         try {
@@ -74,14 +81,10 @@ public class DataExtractor {
         return Integer.valueOf(text);
     }
 
-    public static EntriesCollection extractData(String html, int numberOfEntries) {
+    public static EntriesCollection extractData(String html, int numberOfEntriesToObtain) {
         Document doc = Jsoup.parse(html);
         Elements entriesExtracted = doc.select("table.itemlist tr");
-        int numberOfEntriesObtained = 0;
-        String title = "";
-        int points = 0;
-        int orderNumber = 0;
-        int commentsNumber = 0;
+        numberOfEntriesObtained = 0;
 
         EntriesCollection entriesCollection = EntriesCollection.getInstance();
         int tdCount = 0;
@@ -96,34 +99,44 @@ public class DataExtractor {
             //Obtain title
             if (element.selectFirst("a.storylink") != null) {
                 title = element.selectFirst("a.storylink").text();
-
             }
+
             //Obtain points
             if (element.selectFirst("span.score") != null) {
                 points = extractNumberFromText(element.selectFirst("span.score").text());
-
             }
+
             //Obtain commentsNumber
             if (element.selectFirst("a:contains(comments)") != null) {
                 commentsNumber = extractNumberFromText(element.selectFirst("a:contains(comments)").text());
-
             }
-            
+
             if (element.text().equals("")) {
 
-                entriesCollection.addEntry(title, points, orderNumber, commentsNumber);
-                title="";
-                points=0;
-                orderNumber=0;
-                commentsNumber=0;
+                entriesCollection.addEntry(new Entry.Builder()
+                        .orderNumber(orderNumber)
+                        .title(title)
+                        .points(points)
+                        .commentsNumber(commentsNumber)
+                        .build());
+
+                clearPropertiesForNewEntry();
                 numberOfEntriesObtained++;
 
-                if (numberOfEntriesObtained + 1 > numberOfEntries) {
+                if (numberOfEntriesObtained >= numberOfEntriesToObtain) {
                     break;
                 }
+
             }
         }
 
         return entriesCollection;
+    }
+
+    private static void clearPropertiesForNewEntry() {
+        title = "";
+        points = 0;
+        orderNumber = 0;
+        commentsNumber = 0;
     }
 }
