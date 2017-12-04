@@ -19,4 +19,5 @@ interface EntryInterface {
 
     public int getCommentsNumber();
     
+    
 }

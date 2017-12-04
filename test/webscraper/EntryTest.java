@@ -16,14 +16,25 @@ import static org.junit.Assert.*;
  */
 public class EntryTest {
 
-    String title = "Test Title";
-    int orderNumber = 1;
-    int points = 4;
-    int comments = 5;
+    String title;
+    int orderNumber;
+    int points;
+    int commentsNumber;
+
     Entry instance;
 
     public EntryTest() {
-        instance = new Entry(title, points, orderNumber, comments);
+        title = "title2";
+        points = 5;
+        orderNumber = 2;
+        commentsNumber = 9;
+
+        instance = new Entry.Builder()
+                .orderNumber(orderNumber)
+                .title(title)
+                .points(points)
+                .commentsNumber(commentsNumber)
+                .build();
     }
 
     @BeforeClass
@@ -78,7 +89,7 @@ public class EntryTest {
     public void testGetCommentsNumber() {
         System.out.println("getCommentsNumber");
 
-        int expResult = comments;
+        int expResult = commentsNumber;
         int result = instance.getCommentsNumber();
         assertEquals(expResult, result);
     }

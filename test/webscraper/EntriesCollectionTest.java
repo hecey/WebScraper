@@ -14,9 +14,13 @@ import static org.junit.Assert.*;
  */
 public class EntriesCollectionTest {
 
-   
     private EntriesCollection instance;
     private final int number = 5;
+
+    private String title;
+    private int orderNumber;
+    private int points;
+    private int commentsNumber;
 
     public EntriesCollectionTest() {
         this.instance = EntriesCollection.getInstance();
@@ -40,12 +44,10 @@ public class EntriesCollectionTest {
     @Test
     public void testAddEntry() {
         System.out.println("addEntry");
-        //String title, int points, int orderNumber, int commentsNumber
+        testData();
 
-        instance.addEntry("Test1", 1, 1, 3);
-        instance.addEntry("Test2", 3, 2, 1);
         instance.displayEntries();
-
+        instance.removeAllEntries();
     }
 
     /**
@@ -56,10 +58,10 @@ public class EntriesCollectionTest {
         System.out.println("*************************************");
         System.out.println("displayEntries");
         System.out.println("*************************************");
-         instance.addEntry("Test1", 1, 1, 3);
-        instance.addEntry("Test2", 3, 2, 1);
-        instance.displayEntries();
+        testData();
 
+        instance.displayEntries();
+        instance.removeAllEntries();
     }
 
     /**
@@ -70,11 +72,10 @@ public class EntriesCollectionTest {
         System.out.println("*************************************");
         System.out.println("ordeyByComments");
         System.out.println("*************************************");
-         instance.addEntry("Test1", 1, 1, 3);
-        instance.addEntry("Test2", 3, 2, 1);
+        testData();
         instance.ordeyByComments();
         instance.displayEntries();
-
+        instance.removeAllEntries();
     }
 
     /**
@@ -85,10 +86,10 @@ public class EntriesCollectionTest {
         System.out.println("*************************************");
         System.out.println("ordeyByPoints");
         System.out.println("*************************************");
-         instance.addEntry("Test1", 1, 1, 3);
-        instance.addEntry("Test2", 3, 2, 1);
+        testData();
         instance.ordeyByPoints();
         instance.displayEntries();
+        instance.removeAllEntries();
     }
 
     /**
@@ -100,14 +101,10 @@ public class EntriesCollectionTest {
         System.out.println("FilterByTitleMoreThan");
         System.out.println("*************************************");
 
-        //String title, int points, int orderNumber, int commentsNumber
-        instance.addEntry("Test1 Test2 Test3 Test4 Test5 Test6", 1, 3, 3);
-        instance.addEntry("Test1 Test2 Test3 Test4 Test5", 1, 4, 3);
-         instance.addEntry("Test1", 1, 1, 3);
-        instance.addEntry("Test2", 3, 2, 1);
+        testData();
         instance.FilterByTitleMoreThan(number);
         instance.displayEntries();
-
+        instance.removeAllEntries();
     }
 
     /**
@@ -118,11 +115,34 @@ public class EntriesCollectionTest {
         System.out.println("*************************************");
         System.out.println("FilterByTitleLessThanOrEqual");
         System.out.println("*************************************");
-        //String title, int points, int orderNumber, int commentsNumber
-        instance.addEntry("Test1 Test2 Test3 Test4 Test5 Test6", 1, 5, 3);
-        instance.addEntry("Test1 Test2 Test3 Test4 Test5", 1, 6, 3);
-        instance.addEntry("Test2", 3, 7, 1);
+
+        testData();
         instance.FilterByTitleLessThanOrEqual(number);
         instance.displayEntries();
+        instance.removeAllEntries();
+    }
+
+    private void testData() {
+        title = "";
+        for (int i = 0; i < 10; i++) {
+
+            // for (int x = 0; x < i; x++) 
+            title += "title" + i + " ";
+
+            points = i * 2;
+            orderNumber = i;
+            commentsNumber = 100 - i;
+
+            instance.addEntry(new Entry.Builder()
+                    .orderNumber(orderNumber)
+                    .title(title)
+                    .points(points)
+                    .commentsNumber(commentsNumber)
+                    .build());
+            if (i == 10) {
+                title = "";
+            }
+        }
+
     }
 }

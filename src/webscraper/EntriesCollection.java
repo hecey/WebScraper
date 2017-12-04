@@ -22,7 +22,7 @@ public class EntriesCollection {
     private int i;
 
     protected EntriesCollection() {
-        entriesCollection = new ArrayList<>();
+        entriesCollection = new ArrayList<Entry>();
     }
 
     public static EntriesCollection getInstance() {
