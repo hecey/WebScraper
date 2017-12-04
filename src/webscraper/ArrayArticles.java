@@ -13,7 +13,7 @@ import java.util.function.ToIntFunction;
  *
  * @author kat
  */
-public class ArrayArticles implements Collection{
+public class ArrayArticles implements Collection {
 
     private static ArrayArticles instance = null;
     ArrayList<Item> entriesCollection;
@@ -72,10 +72,9 @@ public class ArrayArticles implements Collection{
         System.out.println(newline + size + " records presented..." + newline + newline);
     }
 
-    public <T> ArrayArticles ordeyByNumberOf(ToIntFunction <? super Item> keyExtractor) {
+    public <T> ArrayArticles ordeyByNumberOf(ToIntFunction<? super Item> keyExtractor) {
 
-        entriesCollection.sort((Comparator<? super Item>) 
-                Comparator.comparingInt(keyExtractor));
+        entriesCollection.sort((Comparator<? super Item>) Comparator.comparingInt(keyExtractor));
 
         return this;
     }
@@ -96,33 +95,14 @@ public class ArrayArticles implements Collection{
 
     public ArrayArticles FilterByTitleMoreThan(int number) {
 
-        ArrayList<Item> secondList = new ArrayList<>();
-
-        entriesCollection.forEach((a) -> {
-            String trimmed = a.getTitle().trim();
-            int words = trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
-            if (words > number) {
-                secondList.add(a);
-            }
-        });
-
-        entriesCollection = secondList;
+        entriesCollection.removeIf(a -> countWords(a.getTitle()) < number);
 
         return this;
     }
 
     public ArrayArticles FilterByTitleLessThanOrEqual(int number) {
-        ArrayList<Item> secondList = new ArrayList<>();
 
-        entriesCollection.forEach((a) -> {
-            String trimmed = a.getTitle().trim();
-            int words = trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
-            if (words <= number) {
-                secondList.add(a);
-            }
-        });
-
-        entriesCollection = secondList;
+        entriesCollection.removeIf(a -> countWords(a.getTitle()) > number);
 
         return this;
     }
@@ -145,5 +125,11 @@ public class ArrayArticles implements Collection{
 
         return this;
 
+    }
+
+    private int countWords(String string) {
+        String trimmed = string.trim();
+        int words = trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
+        return words;
     }
 }

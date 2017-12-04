@@ -15,7 +15,7 @@ import java.util.function.ToIntFunction;
 public class Configuration {
 
     public static final int numberOfEntries = 30;
-    public static int filterTitleParameter = 5;
+    public static int filterTitleParameter = 6;
     public static String url = "news.ycombinator.com/";
 
     public static int MAX_NUMBER_OF_ENTRIES = 40;
