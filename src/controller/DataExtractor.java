@@ -69,35 +69,30 @@ public class DataExtractor {
     }
 
     private static int extractNumberFromText(String text) {
-        int spaceIndex = text.indexOf(" ");
+
+        int spaceIndex;
+
+        spaceIndex = (text.contains(" ")) ? text.indexOf(" ") : text.length();
+        spaceIndex = (text.contains(".")) ? text.indexOf(".") : text.length();
+
         String numberExtracted = text.substring(0, spaceIndex);
-        if (NumberUtils.isCreatable(numberExtracted)) {
-            return Integer.valueOf(numberExtracted);
-        } else {
-            return 0;
-        }
-    }
 
-    private static int extractOrderNumber(String text) {
+        return (NumberUtils.isCreatable(numberExtracted)) ? Integer.valueOf(numberExtracted) : 0;
 
-        text = text.substring(0, text.length() - 1);
-        return Integer.valueOf(text);
     }
 
     public static Collection extractData(String html, int numberOfEntriesToObtain,
             Class<? extends Item> item, Collection collection) {
         Document doc = Jsoup.parse(html);
         Elements entriesExtracted = doc.select("table.itemlist tr");
-        
 
-        
         for (Element element : entriesExtracted) {
-            
+
             //Obtain orderNumber
             if (element.selectFirst("td.title") != null
                     && NumberUtils.isCreatable(element.selectFirst("td.title").text())) {
 
-                orderNumber = extractOrderNumber(element.selectFirst("td.title").text());
+                orderNumber = extractNumberFromText(element.selectFirst("td.title").text());
             }
             //Obtain title
             if (element.selectFirst("a.storylink") != null) {
@@ -113,10 +108,10 @@ public class DataExtractor {
             if (element.selectFirst("a:contains(comments)") != null) {
                 commentsNumber = extractNumberFromText(element.selectFirst("a:contains(comments)").text());
             }
-            
+
             //add to collection
-            if (element.text().equals("") && !title.equals("") && orderNumber !=0) {
-                
+            if (element.text().equals("") && !title.equals("") && orderNumber != 0) {
+
                 collection.addEntry(
                         Builder.build(item)
                                 .setter(p -> p.setTitle(title))
@@ -126,7 +121,6 @@ public class DataExtractor {
                                 .get());
 
                 clearPropertiesForNewEntry();
-                
 
                 if (collection.size() >= numberOfEntriesToObtain) {
                     break;
