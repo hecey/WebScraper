@@ -133,12 +133,14 @@ public class EntriesCollectionTest {
             orderNumber = i;
             commentsNumber = 100 - i;
 
-            instance.addEntry(new Article.Builder()
-                    .orderNumber(orderNumber)
-                    .title(title)
-                    .points(points)
-                    .commentsNumber(commentsNumber)
-                    .build());
+            instance.addEntry(
+                    Builder.build(Article.class)
+                            .set(p -> p.setTitle(title))
+                            .set(p -> p.setOrderNumber(orderNumber))
+                            .set(p -> p.setPoints(points))
+                            .set(p -> p.setCommentsNumber(commentsNumber))
+                            .get());
+            
             if (i == 10) {
                 title = "";
             }

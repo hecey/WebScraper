@@ -55,7 +55,7 @@ public class DataExtractorTest {
         boolean expResult = true;
         String result = DataExtractor.getUrlCodeAsString(url);
         assertEquals(expResult, DataExtractor.hasExtradtedCode(result));
-
+        Collection collection;
     }
 
     /**
@@ -82,22 +82,23 @@ public class DataExtractorTest {
 
         boolean expResult = true;
 
-        ArrayArticles result = DataExtractor.extractData(html, numberOfEntries);
+        Collection result = DataExtractor
+                .extractData(html, Configuration.numberOfEntries, Configuration.item, ArrayArticles.getInstance());
         assertEquals(expResult, result.hasEntries());
 
     }
-    
-     public void testExtractDataHasFailed() {
+
+    public void testExtractDataHasFailed() {
         System.out.println("extractData");
 
         int numberOfEntries = 30;
 
         boolean expResult = true;
 
-        ArrayArticles result = DataExtractor.extractData("", numberOfEntries);
+        Collection result = DataExtractor
+                .extractData("", Configuration.numberOfEntries, Configuration.item, ArrayArticles.getInstance());
         assertEquals(expResult, result.hasEntries());
 
     }
-
 
 }

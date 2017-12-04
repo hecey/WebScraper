@@ -29,12 +29,13 @@ public class EntryTest {
         orderNumber = 2;
         commentsNumber = 9;
 
-        instance = new Article.Builder()
-                .orderNumber(orderNumber)
-                .title(title)
-                .points(points)
-                .commentsNumber(commentsNumber)
-                .build();
+        instance = Builder.build(Article.class)
+                .set(p -> p.setTitle(title))
+                .set(p -> p.setOrderNumber(orderNumber))
+                .set(p -> p.setPoints(points))
+                .set(p -> p.setCommentsNumber(commentsNumber))
+                .get();
+        
     }
 
     @BeforeClass

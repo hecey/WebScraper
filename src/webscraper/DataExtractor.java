@@ -117,10 +117,10 @@ public class DataExtractor {
 
                 collection.addEntry(
                         Builder.build(item)
-                                .set(a -> a.setTitle(title))
-                                .set(a -> a.setOrderNumber(orderNumber))
-                                .set(a -> a.setPoints(points))
-                                .set(a -> a.setCommentsNumber(commentsNumber))
+                                .set(p -> p.setTitle(title))
+                                .set(p -> p.setOrderNumber(orderNumber))
+                                .set(p -> p.setPoints(points))
+                                .set(p -> p.setCommentsNumber(commentsNumber))
                                 .get());
 
                 clearPropertiesForNewEntry();
