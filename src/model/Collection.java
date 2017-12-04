@@ -36,4 +36,6 @@ public interface Collection {
 
     //public Collection getInstance();
 
+    public int size();
+
 }

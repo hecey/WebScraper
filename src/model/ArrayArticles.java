@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.function.ToIntFunction;
 import controller.Configuration;
 
-
 /**
  *
  * @author kat
@@ -133,5 +132,11 @@ public class ArrayArticles implements Collection {
         String trimmed = string.trim();
 
         return trimmed.isEmpty() ? 0 : trimmed.split("\\s+").length;
+    }
+
+    @Override
+    public int size() {
+        return entriesCollection.size();
+
     }
 }

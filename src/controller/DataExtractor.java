@@ -88,11 +88,11 @@ public class DataExtractor {
             Class<? extends Item> item, Collection collection) {
         Document doc = Jsoup.parse(html);
         Elements entriesExtracted = doc.select("table.itemlist tr");
-        numberOfEntriesObtained = 0;
+        
 
-        int tdCount = 0;
+        
         for (Element element : entriesExtracted) {
-            tdCount++;
+            
             //Obtain orderNumber
             if (element.selectFirst("td.title") != null
                     && NumberUtils.isCreatable(element.selectFirst("td.title").text())) {
@@ -113,9 +113,10 @@ public class DataExtractor {
             if (element.selectFirst("a:contains(comments)") != null) {
                 commentsNumber = extractNumberFromText(element.selectFirst("a:contains(comments)").text());
             }
-
-            if (element.text().equals("")) {
-
+            
+            //add to collection
+            if (element.text().equals("") && !title.equals("") && orderNumber !=0) {
+                
                 collection.addEntry(
                         Builder.build(item)
                                 .setter(p -> p.setTitle(title))
@@ -125,9 +126,9 @@ public class DataExtractor {
                                 .get());
 
                 clearPropertiesForNewEntry();
-                numberOfEntriesObtained++;
+                
 
-                if (numberOfEntriesObtained >= numberOfEntriesToObtain) {
+                if (collection.size() >= numberOfEntriesToObtain) {
                     break;
                 }
 
