@@ -85,29 +85,29 @@ public class DataExtractor {
     public static Collection extractData(String html, int numberOfEntriesToObtain,
             Class<? extends Item> item, Collection collection) {
         Document doc = Jsoup.parse(html);
-        Elements entriesExtracted = doc.select("table.itemlist tr");
+        Elements entriesExtracted = doc.select(Configuration.SEARCH_PARAMETER_ITEMS);
 
         for (Element element : entriesExtracted) {
 
             //Obtain orderNumber
-            if (element.selectFirst("td.title") != null
-                    && NumberUtils.isCreatable(element.selectFirst("td.title").text())) {
+            if (element.selectFirst(Configuration.SEARCH_PARAMETER_ORDER_NUMBER) != null
+                    && NumberUtils.isCreatable(element.selectFirst(Configuration.SEARCH_PARAMETER_ORDER_NUMBER).text())) {
 
-                orderNumber = extractNumberFromText(element.selectFirst("td.title").text());
+                orderNumber = extractNumberFromText(element.selectFirst(Configuration.SEARCH_PARAMETER_ORDER_NUMBER).text());
             }
             //Obtain title
-            if (element.selectFirst("a.storylink") != null) {
-                title = element.selectFirst("a.storylink").text();
+            if (element.selectFirst(Configuration.SEARCH_PARAMETER_TITLE) != null) {
+                title = element.selectFirst(Configuration.SEARCH_PARAMETER_TITLE).text();
             }
 
             //Obtain points
-            if (element.selectFirst("span.score") != null) {
-                points = extractNumberFromText(element.selectFirst("span.score").text());
+            if (element.selectFirst(Configuration.SEARCH_PARAMETER_POINTS) != null) {
+                points = extractNumberFromText(element.selectFirst(Configuration.SEARCH_PARAMETER_POINTS).text());
             }
 
             //Obtain commentsNumber
-            if (element.selectFirst("a:contains(comments)") != null) {
-                commentsNumber = extractNumberFromText(element.selectFirst("a:contains(comments)").text());
+            if (element.selectFirst(Configuration.SEARCH_PARAMETER_COMMENTS_NUMBER) != null) {
+                commentsNumber = extractNumberFromText(element.selectFirst(Configuration.SEARCH_PARAMETER_COMMENTS_NUMBER).text());
             }
 
             //add to collection
@@ -142,7 +142,7 @@ public class DataExtractor {
 
     public static Collection scrapeURL(String url, Collection collection) {
 
-        String html = DataExtractor.getUrlCodeAsString("https://" + url);
+        String html = DataExtractor.getUrlCodeAsString(Configuration.HTTPS_STRING + url);
         if (DataExtractor.hasExtradtedCode(html)) {
 
             return DataExtractor

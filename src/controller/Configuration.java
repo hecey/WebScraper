@@ -44,5 +44,11 @@ public class Configuration {
     public static Class<? extends Item> item= Article.class;
     public static Collection entriesCollection = ArrayArticles.getInstance();
     
+    public static final String SEARCH_PARAMETER_ITEMS= "table.itemlist tr";
+    public static final String SEARCH_PARAMETER_ORDER_NUMBER="td.title";
+    public static final String SEARCH_PARAMETER_TITLE="a.storylink";
+    public static final String SEARCH_PARAMETER_POINTS="span.score";
+    public static final String SEARCH_PARAMETER_COMMENTS_NUMBER="a:contains(comments)";
+    public static final String HTTPS_STRING="https://";
 
 }
