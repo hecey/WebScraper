@@ -125,9 +125,38 @@ public class EntriesCollectionTest {
         instance.removeAllEntries();
     }
 
+    /**
+     * Test of FilterByTitleLessThanOrEqualOrderbyPoinst method, of class EntriesCollection.
+     */
+    @Test
+    public void testFilterByTitleLessThanOrEqualOrderbyPoinst() {
+        System.out.println("*************************************");
+        System.out.println("testFilterByTitleLessThanOrEqualOrderbyPoinst");
+        System.out.println("*************************************");
+
+        testData();
+        instance.FilterByTitleLessThanOrEqual(number).ordeyByPoints().displayEntries();
+        instance.removeAllEntries();
+    }
+    
+    /**
+     * Test of FilterByTitleMoreThanOrderbyComments method, of class EntriesCollection.
+     */
+    @Test
+    public void testFilterByTitleMoreThanOrderbyComments() {
+        System.out.println("*************************************");
+        System.out.println("testFilterByTitleMoreThanOrderbyComments");
+        System.out.println("*************************************");
+
+        testData();
+        instance.FilterByTitleMoreThan(number).ordeyByComments().displayEntries();
+        instance.removeAllEntries();
+    }
+    
     private void testData() {
         title = "";
-        for (int i = 0; i < 10; i++) {
+        int numberofEntries= 30;
+        for (int i = 0; i < numberofEntries; i++) {
 
             // for (int x = 0; x < i; x++) 
             title += "title" + i + " ";
