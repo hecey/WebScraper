@@ -96,7 +96,7 @@ public class ArrayArticles implements Collection {
 
     public ArrayArticles FilterByTitleMoreThan(int number) {
 
-        entriesCollection.removeIf(a -> countWords(a.getTitle()) < number);
+        entriesCollection.removeIf(a -> countWords(a.getTitle()) <= number);
 
         return this;
     }

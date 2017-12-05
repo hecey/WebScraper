@@ -72,8 +72,9 @@ public class DataExtractor {
 
         int spaceIndex;
 
-        spaceIndex = (text.contains(" ")) ? text.indexOf(" ") : text.length();
-        spaceIndex = (text.contains(".")) ? text.indexOf(".") : text.length();
+        spaceIndex = (text.contains(" "))
+                ? text.indexOf(" ")
+                : (text.contains(".")) ? text.indexOf(".") : text.length();
 
         String numberExtracted = text.substring(0, spaceIndex);
 
